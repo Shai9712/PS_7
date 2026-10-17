@@ -1,0 +1,271 @@
+THE ASSUMPTION AUDIT:
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Assumption Audit</title>
+<style>
+:root{--bg:#f6f6f3;--sf:#fff;--tx:#1b1d1f;--mu:#5f656b;--bd:#d9d9d3;--ac:#1f4fd8;--c5:#b3261e;--c4:#b85400;--c3:#8a6d00;--c2:#4a6b3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141516;--sf:#1d1f21;--tx:#e8e8e6;--mu:#9a9fa4;--bd:#34373a;--ac:#7ea2ff;--c5:#ff8a80;--c4:#ffb066;--c3:#e6c85c;--c2:#9fc88a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141516;--sf:#1d1f21;--tx:#e8e8e6;--mu:#9a9fa4;--bd:#34373a;--ac:#7ea2ff;--c5:#ff8a80;--c4:#ffb066;--c3:#e6c85c;--c2:#9fc88a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:18px max(32px,calc((100% - 1400px)/2 + 32px));border-bottom:1px solid var(--bd);background:var(--sf);display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+h1{font-size:24px;margin:0}header span{color:var(--mu);font-size:15px}
+main{display:grid;grid-template-columns:minmax(400px,540px) 1fr;gap:28px;padding:28px 32px;max-width:1400px;margin:0 auto}main>*{min-width:0}
+@media(max-width:860px){main{grid-template-columns:1fr}}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:18px}
+textarea{width:100%;height:520px;resize:vertical;font:15px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:4px;padding:8px}
+button,label.b{font:inherit;border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:6px;padding:9px 16px;cursor:pointer}
+button.p{background:var(--ac);border-color:var(--ac);color:#fff}button:hover,label.b:hover{filter:brightness(.95)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center}.mu{color:var(--mu);font-size:15px}
+.sum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}.sum div{flex:1;min-width:90px;border:1px solid var(--bd);border-radius:4px;padding:6px 10px;background:var(--sf)}
+.sum b{font-size:30px;display:block}
+.chip{border-radius:16px;padding:5px 16px;font-size:15px}.chip.on{background:var(--tx);color:var(--bg)}
+details{border:1px solid var(--bd);border-left-width:4px;border-radius:4px;background:var(--sf);margin-bottom:8px}
+summary{padding:14px 16px;cursor:pointer;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+summary .t{flex:1;font-weight:600}.sc{font:600 14px ui-monospace,monospace;min-width:100px}
+.l5{border-left-color:var(--c5)}.l4{border-left-color:var(--c4)}.l3{border-left-color:var(--c3)}.l2{border-left-color:var(--c2)}
+.t5{color:var(--c5)}.t4{color:var(--c4)}.t3{color:var(--c3)}.t2{color:var(--c2)}
+.bd{padding:2px 12px 12px}.bd h4{margin:10px 0 2px;font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--mu)}.bd p{margin:0}
+.ev{font:14.5px/1.45 ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--bd);border-radius:4px;padding:4px 8px;margin:3px 0;overflow-x:auto;white-space:pre-wrap}
+.ev i{color:var(--mu);font-style:normal;margin-right:8px}.ev[data-ln]:not([data-ln=""]){cursor:pointer}.ev[data-ln]:not([data-ln=""]):hover{border-color:var(--ac)}ol.st{margin:6px 0 0;padding-left:20px;text-align:left;display:inline-block}
+.done{opacity:.5}.cov{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px}.cov span{font-size:15px;border:1px solid var(--bd);border-radius:4px;padding:1px 8px;background:var(--sf)}.cov .no{border-color:var(--c4);color:var(--c4)}
+.empty{padding:12px 4px;color:var(--mu);font-size:18px;line-height:1.9}
+/* ---- design pass ---- */
+:root{--bg:#f3f0e8;--sf:#fffdf8;--tx:#1d1c19;--mu:#6a665c;--bd:#d9d4c7;--ac:#1d3a5f;--c5:#a4281c;--c4:#b0540a;--c3:#8c6a00;--c2:#3b6a48}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14130f;--sf:#1d1c17;--tx:#ece8dc;--mu:#a29d8f;--bd:#37352c;--ac:#a9c1e4;--c5:#ff8f80;--c4:#ffb36b;--c3:#e8cb62;--c2:#9fcb8e}}
+:root[data-theme="dark"]{--bg:#14130f;--sf:#1d1c17;--tx:#ece8dc;--mu:#a29d8f;--bd:#37352c;--ac:#a9c1e4;--c5:#ff8f80;--c4:#ffb36b;--c3:#e8cb62;--c2:#9fcb8e}
+h1,.big,.verd,.empty b,.sum b{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+header{border-top:5px solid var(--ac);padding-block:22px;gap:6px 18px}h1{font-size:32px;font-weight:700;letter-spacing:-.01em}header span{font-size:16px}
+.lab{font:700 12.5px system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:var(--mu)}
+.card{border-radius:4px;box-shadow:0 1px 0 var(--bd)}
+.big{font-size:76px;line-height:1;font-weight:700;font-variant-numeric:tabular-nums;margin-top:4px}.big small{font-size:24px;color:var(--mu);font-weight:400;margin-left:4px}
+.verd{font-size:26px;font-weight:700}.verd .mu{font-family:system-ui,sans-serif;font-weight:400;margin-left:6px}
+.bar{height:8px;background:var(--bd);border-radius:2px;margin:12px 0 10px;overflow:hidden}.bar i{display:block;height:100%;background:currentColor}
+ol.fix{margin:8px 0 0;padding-left:22px}ol.fix li{margin:8px 0}
+textarea{background:var(--sf);border-radius:4px;line-height:1.55}textarea:focus{outline:2px solid var(--ac);outline-offset:1px}
+button,label.b{border-radius:4px;font-weight:500;padding:10px 18px}button.p{background:var(--ac);border-color:var(--ac);color:var(--bg);font-weight:600}
+.chip{border-radius:4px;background:transparent}.chip.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.sum{gap:12px;margin:14px 0}.sum div{border-radius:4px;border-top:3px solid var(--bd);padding:10px 14px;font-size:13px;color:var(--mu);text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+.sum b{text-transform:none;letter-spacing:0;font-size:36px;line-height:1.1;font-weight:700}
+.sum div:has(.t5){border-top-color:var(--c5)}.sum div:has(.t4){border-top-color:var(--c4)}.sum div:has(.t3){border-top-color:var(--c3)}.sum div:has(.t2){border-top-color:var(--c2)}
+details{border-radius:4px;margin-bottom:10px;border-left-width:5px}summary:hover{background:var(--bg)}summary .t{font-size:1.05em}
+.sc{font:700 12px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;border:1.5px solid currentColor;border-radius:3px;padding:3px 9px;min-width:0;white-space:nowrap}
+.bd{padding:4px 18px 18px}.bd h4{margin-top:16px;color:var(--ac)}
+.ev{border:0;border-left:3px solid var(--ac);border-radius:0;background:var(--bg);padding:6px 12px}
+.cov span{border-radius:3px;padding:3px 10px}
+.empty b{font-size:32px;color:var(--tx)}
+ol.st{display:block;padding:0;list-style:none;counter-reset:s;margin-top:16px}ol.st li{counter-increment:s;display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--bd);color:var(--tx);font-size:18px;line-height:1.5}ol.st li:before{content:counter(s);font:700 28px/1 Georgia,serif;color:var(--ac);min-width:30px}
+/* ---- design v3 ---- */
+:root{--bg:#f3f1ea;--sf:#fffdf8;--s2:#efeadd;--tx:#1a2233;--mu:#5d6679;--bd:#d8d3c4;--ac:#1d3a5f;--on:#fff;--grid:rgba(29,58,95,.07);--c5:#b3261e;--c4:#b8560a;--c3:#8a6a00;--c2:#2f7a4a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--sf:#151c2f;--s2:#1b2440;--tx:#e8ecf5;--mu:#8e9ab3;--bd:#2a3555;--ac:#f2b84b;--on:#1a1405;--grid:rgba(142,154,179,.08);--c5:#ff7a6b;--c4:#ffa45c;--c3:#f2cf5b;--c2:#6fd49a}}
+:root[data-theme="dark"]{--bg:#0d1220;--sf:#151c2f;--s2:#1b2440;--tx:#e8ecf5;--mu:#8e9ab3;--bd:#2a3555;--ac:#f2b84b;--on:#1a1405;--grid:rgba(142,154,179,.08);--c5:#ff7a6b;--c4:#ffa45c;--c3:#f2cf5b;--c2:#6fd49a}
+body{font-size:16px}
+header{border-top:0;padding-block:28px;background-color:var(--sf);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px}
+h1{font-size:36px;display:flex;align-items:center;gap:14px}h1:before{content:"";width:16px;height:16px;background:var(--ac);transform:rotate(45deg);border-radius:3px}
+header span{font-size:16px;max-width:62ch}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;box-shadow:0 1px 2px rgba(0,0,0,.12),0 12px 28px -16px rgba(0,0,0,.35)}
+textarea{background:var(--s2);border-radius:8px;font-size:14.5px}
+button,label.b{border-radius:8px;background:var(--s2);font-weight:600;transition:transform .12s,border-color .12s}button:hover,label.b:hover{transform:translateY(-1px);filter:none;border-color:var(--ac)}
+button.p{background:var(--ac);border-color:var(--ac);color:var(--on)}button.p:hover{filter:brightness(1.08)}
+.chip{border-radius:999px;font-weight:500;background:transparent}.chip.on{background:var(--ac);border-color:var(--ac);color:var(--on)}
+.hero{padding:24px}.ring{--p:0;width:136px;height:136px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(currentColor calc(var(--p)*1%),var(--bd) 0)}
+.ring>div{width:108px;height:108px;border-radius:50%;background:var(--sf);color:var(--tx);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring b{font:700 40px/1 Georgia,serif}.ring small{font-size:12px;color:var(--mu);margin-top:2px}
+.verd{font-size:30px;margin:2px 0 6px}
+.sum div{border-radius:10px;border-top-width:4px}
+details{border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.sc{background:color-mix(in srgb,currentColor 14%,transparent);border:0;border-radius:999px;padding:4px 12px}
+.ev{border-left-color:var(--ac);background:var(--s2);border-radius:0 6px 6px 0}
+.cov span{border-radius:999px}
+.empty b{font-size:36px}
+ol.st{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+ol.st li{display:block;background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:18px;font-size:16px;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+ol.st li:before{display:block;margin-bottom:10px;font-size:34px}
+@media(max-width:700px){ol.st{grid-template-columns:1fr}}
+/* ---- design v4: forest + gold ---- */
+:root{--bg:#f1efe6;--sf:#fffdf7;--s2:#ece9db;--tx:#1c2a22;--mu:#5e6b61;--bd:#d5d2c0;--ac:#1f4d3a;--on:#fff;--grid:rgba(31,77,58,.07)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1712;--sf:#15231b;--s2:#1c2e24;--tx:#e9efe8;--mu:#8fa397;--bd:#2b4033;--ac:#e3b341;--on:#1d1604;--grid:rgba(143,163,151,.08);--c2:#79d79a}}
+:root[data-theme="dark"]{--bg:#0e1712;--sf:#15231b;--s2:#1c2e24;--tx:#e9efe8;--mu:#8fa397;--bd:#2b4033;--ac:#e3b341;--on:#1d1604;--grid:rgba(143,163,151,.08);--c2:#79d79a}
+header{position:relative;padding-bottom:34px}header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--c5) 0 25%,var(--c4) 0 50%,var(--c3) 0 75%,var(--c2) 0)}
+.step{display:flex;align-items:center;gap:10px;margin-bottom:14px}.step span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ac);color:var(--on);font:700 13px system-ui,sans-serif}
+.hero{border-top:4px solid var(--ac)}
+.mt{display:flex;gap:3px;align-items:flex-end}.mt i{width:7px;height:16px;border-radius:2px;background:var(--bd)}.mt i.on{background:currentColor}
+summary .mu{font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--s2);padding:3px 10px;border-radius:999px;border:1px solid var(--bd)}
+details{transition:transform .15s,box-shadow .15s}details:hover{transform:translateY(-1px);box-shadow:0 10px 22px -14px rgba(0,0,0,.5)}
+footer{max-width:1400px;margin:8px auto 0;padding:22px 32px 40px;color:var(--mu);font-size:14px;border-top:1px solid var(--bd)}
+/* ---- design v5: bold ---- */
+header{display:block;padding:44px max(32px,calc((100% - 1400px)/2 + 32px)) 48px;background-image:repeating-radial-gradient(circle at 88% 110%,transparent 0 34px,color-mix(in srgb,var(--ac) 28%,transparent) 34px 36px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:auto,28px 28px,28px 28px;overflow:hidden}
+.eyebrow{font:700 13px system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:10px}
+h1{font-size:60px;line-height:1;letter-spacing:-.02em}h1:before{width:22px;height:22px}
+.tag{font:400 28px/1.3 Georgia,serif;margin:14px 0 20px;max-width:30ch}.tag em{color:var(--ac)}
+.pills{display:flex;flex-wrap:wrap;gap:10px}.pills span{font-size:14px;font-weight:600;padding:6px 14px;border-radius:999px;border:1.5px solid var(--ac);color:var(--tx);background:color-mix(in srgb,var(--ac) 10%,transparent);max-width:none}
+.card{box-shadow:0 2px 4px rgba(0,0,0,.15),0 24px 48px -24px rgba(0,0,0,.55)}
+button.p{padding:13px 28px;font-size:17px}button.p:after{content:" \2192"}
+.ring{width:172px;height:172px}.ring>div{width:138px;height:138px}.ring b{font-size:56px}.ring small{font-size:13px}
+.verd{font-size:36px}
+.hero:has(.ring.t5){border-top-color:var(--c5);background:color-mix(in srgb,var(--c5) 9%,var(--sf))}.hero:has(.ring.t3){border-top-color:var(--c3);background:color-mix(in srgb,var(--c3) 9%,var(--sf))}.hero:has(.ring.t2){border-top-color:var(--c2);background:color-mix(in srgb,var(--c2) 9%,var(--sf))}
+.sum div{padding:14px 16px}.sum b{font-size:46px}
+.sum div:has(.t5){background:color-mix(in srgb,var(--c5) 14%,var(--sf))}.sum div:has(.t4){background:color-mix(in srgb,var(--c4) 14%,var(--sf))}.sum div:has(.t3){background:color-mix(in srgb,var(--c3) 14%,var(--sf))}.sum div:has(.t2){background:color-mix(in srgb,var(--c2) 14%,var(--sf))}
+details{border-left-width:6px}
+ol.st li{border-top:4px solid var(--ac)}ol.st li:before{font-size:46px;color:var(--ac)}
+/* ---- design v6: baby pink + red ---- */
+:root{--bg:#fdeef1;--sf:#fffafb;--s2:#fbe0e7;--tx:#3a1620;--mu:#8a5a66;--bd:#f1c4cf;--ac:#c9184a;--on:#fff;--grid:rgba(201,24,74,.07);--c5:#b3261e;--c4:#c2570c;--c3:#9a7400;--c2:#2f7a4a;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#fdeef1;--sf:#fffafb;--s2:#fbe0e7;--tx:#3a1620;--mu:#8a5a66;--bd:#f1c4cf;--ac:#c9184a;--on:#fff;--grid:rgba(201,24,74,.07);--c5:#b3261e;--c4:#c2570c;--c3:#9a7400;--c2:#2f7a4a;color-scheme:light}}
+:root[data-theme="dark"]{--bg:#fdeef1;--sf:#fffafb;--s2:#fbe0e7;--tx:#3a1620;--mu:#8a5a66;--bd:#f1c4cf;--ac:#c9184a;--on:#fff;--grid:rgba(201,24,74,.07);--c5:#b3261e;--c4:#c2570c;--c3:#9a7400;--c2:#2f7a4a;color-scheme:light}
+.card{box-shadow:0 2px 4px rgba(120,20,50,.08),0 24px 48px -24px rgba(170,30,70,.35)}
+details{box-shadow:0 1px 2px rgba(120,20,50,.08)}details:hover{box-shadow:0 10px 22px -14px rgba(170,30,70,.45)}
+ol.st li{box-shadow:0 1px 2px rgba(120,20,50,.1)}
+/* ---- layout v7 ---- */
+body{background-image:radial-gradient(color-mix(in srgb,var(--ac) 16%,transparent) 1px,transparent 1.3px);background-size:22px 22px}
+header{display:grid;grid-template-columns:1fr minmax(260px,380px);gap:48px;align-items:center}
+.hs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hs div{background:color-mix(in srgb,var(--sf) 85%,transparent);border:1px solid var(--bd);border-radius:12px;padding:16px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mu);box-shadow:0 8px 20px -14px rgba(170,30,70,.5)}
+.hs b{display:block;font:700 40px/1 Georgia,serif;color:var(--ac);letter-spacing:0;margin-bottom:6px}
+main{align-items:start}main>section.card:first-child{position:sticky;top:20px}
+textarea{height:440px}
+.sect{display:flex;align-items:center;gap:14px}.sect:after{content:"";flex:1;height:1px;background:var(--bd)}
+.sum{display:grid;grid-template-columns:repeat(5,1fr)}
+ol.fix{list-style:none;padding:0;margin:10px 0 0;counter-reset:f;display:grid;gap:10px}
+ol.fix li{counter-increment:f;position:relative;margin:0;padding:12px 16px 12px 56px;background:var(--s2);border-radius:10px;border-left:4px solid var(--ac)}
+ol.fix li:before{content:counter(f);position:absolute;left:16px;top:8px;font:700 28px/1.2 Georgia,serif;color:var(--ac)}
+@media(max-width:860px){header{grid-template-columns:1fr}h1{font-size:44px}main>section.card:first-child{position:static}}
+@media(max-width:700px){.sum{grid-template-columns:repeat(2,1fr)}}
+.dot{fill:currentColor;stroke:var(--sf);stroke-width:2;cursor:pointer}.dot:hover{r:9}.mx{margin:14px 0}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}header,footer,main>section.card:first-child,.row button{display:none!important}body{zoom:1!important;background:#fff}main{display:block;padding:0}.card,details{box-shadow:none!important;break-inside:avoid}}
+</style></head><body>
+<header><div class="hl"><div class="eyebrow">Project gap analysis</div><h1>Assumption Audit</h1><p class="tag">Find what your plan forgot to say, <em>ranked by impact</em>.</p><div class="pills"><span>Missing assumptions</span><span>Hidden constraints</span><span>Questions to ask</span><span>Runs offline</span></div></div><div class="hs"><div><b>12</b>Topics checked</div><div><b>8</b>Text patterns</div><div><b>11</b>Data checks</div><div><b>0</b>Bytes uploaded</div></div></header>
+<main>
+<section class="card">
+<div class="lab step"><span>1</span>Your document or data</div>
+<textarea id="in" spellcheck="false" placeholder="Paste a project brief, plan, workflow steps, or CSV data here…"></textarea>
+<div class="mu" id="cnt" style="margin-top:6px;font-size:13px">0 lines · 0 words</div>
+<div class="row"><button class="p" id="go">Analyze</button><label class="b">Open file<input id="fi" type="file" accept=".txt,.md,.csv,.tsv,.json" hidden></label>
+<button id="s1">Sample: plan</button><button id="s2">Sample: CSV</button></div>
+<p class="mu">Accepts text, Markdown, CSV/TSV. Ctrl+Enter analyzes. Findings are heuristic: each one cites its evidence so you can verify it.</p>
+</section>
+<section id="out"><div class="lab step"><span>2</span>Audit results</div><div class="empty"><b>How it works</b><br><ol class="st"><li>Paste your project plan, workflow steps or a CSV on the left.</li><li>Press Analyze. You get a readiness score and a list of gaps, most serious first.</li><li>Open a gap to see the proof, why it matters, and what to do.</li><li>Click proof lines to jump to them in your text. Copy the questions for your next team meeting.</li></ol></div></section>
+</main>
+<footer>Rule-based analysis: every finding cites its evidence. Your data never leaves this page.</footer>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const TOPICS=[
+['metrics','Success metrics',5,/\b(kpi|metrics?|success criteria|okr|acceptance criteria|baseline|target)\b/i,null,'How will we know this succeeded, and against what baseline?','Define 2–3 measurable success criteria with baseline, target and measurement date.'],
+['scope','Scope boundaries',4,/\b(out of scope|non-goals?|not included|excluded|scope)\b/i,null,'What is explicitly not part of this work?','Write an in-scope / out-of-scope list and get it acknowledged by stakeholders.'],
+['owner','Ownership',4,/\b(owner|owned by|responsible|accountable|raci|assigned to|dri)\b/i,null,'Who is accountable for each deliverable and the final outcome?','Name one accountable person per deliverable and per decision.'],
+['time','Timeline & milestones',4,/\b(deadline|due|milestones?|timeline|schedule|sprint|launch date|eta|by (q[1-4]|\d{1,2} \w+))\b/i,null,'What are the dates, and what is the critical path?','Add milestones with dates and mark the dependencies that gate them.'],
+['budget','Budget & cost',4,/\b(budget|cost|funding|spend|pricing|usd|inr)\b|[$₹€£]/i,/\b(vendor|api|cloud|hire|licen[sc]e|infrastructure|third[- ]party)\b/i,'What does this cost to build and to run, and who approves overruns?','Estimate build and run costs, add a contingency, and name the approver.'],
+['security','Security & privacy',4,/\b(security|privacy|encrypt\w*|gdpr|dpdp|hipaa|compliance|authenticat\w*|authoriz\w*|pii|access control|retention)\b/i,/\b(user data|personal|customer|payment|card|health|patient|emails?|login|password|pii|kyc|order details)\b/i,'What sensitive data is involved, and which regulations or policies apply?','Run a data-classification and privacy review before design is finalised.'],
+['fail','Failure handling & rollback',4,/\b(rollback|fallback|retry|failure|error handling|contingency|backup|incident|on-call)\b/i,/\b(production|live|migration|deploy\w*|release|payment|automat\w*|go live)\b/i,'What happens when a step, vendor or release fails?','Define failure modes, a rollback path and an escalation contact for each critical step.'],
+['deps','Dependencies',3,/\b(dependenc\w*|depends on|blocked by|prerequisites?|upstream)\b/i,null,'What must be true or delivered by others before this can proceed?','List upstream dependencies with owners and need-by dates.'],
+['scale','Scale & performance',3,/\b(scal\w*|load|latency|throughput|concurren\w*|performance|capacity|p95|sla|uptime)\b/i,/\b(users|traffic|real-time|million|thousand|\d+k)\b/i,'What volume and response times must it handle, now and in a year?','State expected load and latency targets and test against them.'],
+['test','Testing & validation',3,/\b(test\w*|qa|validat\w*|verif\w*|pilot|uat|benchmark\w*)\b/i,null,'How will quality be checked before wide release?','Add a test plan and a limited pilot with exit criteria.'],
+['stake','Stakeholders & approvals',3,/\b(stakeholders?|sponsor|approv\w*|sign-off|steering|legal)\b/i,null,'Who must approve, and who is affected but not consulted?','Map stakeholders and required approvals, with expected turnaround.'],
+['maint','Operations & maintenance',2,/\b(maintenance|monitor\w*|operat\w*|handover|documentation|training|support)\b/i,null,'Who runs and supports this after launch?','Plan monitoring, support ownership and documentation.']
+];
+const SENS=/(^|_|\b)(email|phone|mobile|ssn|aadhaar|pan|dob|birth|address|salary|name|passport|card)(\b|_|$)/i;
+const mk=(id,cat,title,sev,conf,ev,why,q,rec)=>({id,cat,title,sev,conf,ev,why,q,rec,score:Math.round(sev*conf*20),st:'open'});
+const lvl=s=>s>=70?5:s>=50?4:s>=30?3:2,LN={5:'Critical',4:'High',3:'Medium',2:'Low'};
+let F=[],COV=[],ST={};
+
+function analyzeText(t){
+ const L=t.split(/\r?\n/).map((x,i)=>({ln:i+1,txt:x.trim()})).filter(x=>x.txt),f=re=>L.filter(l=>re.test(l.txt)),out=[];COV=[];
+ for(const [id,name,sev,re,esc2,q,rec] of TOPICS){
+  const hit=f(re);COV.push({name,n:hit.length});if(hit.length)continue;
+  const ctx=esc2?f(esc2).slice(0,2):[];
+  out.push(mk('gap-'+id,'Gap',name+' not addressed',Math.min(5,sev+(ctx.length?1:0)),ctx.length?.85:.6,ctx,
+   ctx.length?'The document raises related topics (evidence below) but nothing covers this. Risk is higher because of that context.':'No mention found. Absence is not proof it was never considered, so confirm with the author.',q,rec));
+ }
+ const add=(id,cat,title,sev,conf,re,why,q,rec,neg)=>{const ev=L.filter(l=>re.test(l.txt)&&!(neg&&neg.test(l.txt)));if(ev.length)out.push(mk(id,cat,title,sev,conf,ev.slice(0,4),why+(ev.length>4?' ('+ev.length+' occurrences, 4 shown)':''),q,rec))};
+ add('vague','Assumption','Unquantified requirements',3,.8,/\b(fast|quick(ly)?|scalable|robust|user-friendly|intuitive|seamless|large|many|several|soon|asap|flexible|secure|efficient|easy|minimal|significant(ly)?|better|improve[ds]?|reduces?|optimi[sz]e[ds]?)\b/i,'These statements cannot be tested because they have no number, threshold or baseline.','What measurable value counts as “fast”, “scalable” or “improved”?','Replace each with a number, a unit and a baseline.',/\d/);
+ add('hedge','Question','Open decisions left as placeholders',3,.9,/\b(tbd|tbc|todo|to be decided|probably|presumably|maybe|might|not sure)\b/i,'Placeholders become hidden blockers when other work depends on them.','Who decides each of these, and by when?','Convert each into a tracked decision with an owner and date.');
+ add('abs','Assumption','Untested absolutes',4,.75,/\b(always|never|obviously|of course|everyone|all users|no one|guaranteed|simply)\b/i,'Absolute claims about users or systems are rarely true and are seldom verified.','What evidence supports this, and what happens in the exceptions?','Validate with data or reword as a hypothesis with a test.');
+ const as=L.filter(l=>/\bassum\w*/i.test(l.txt));if(as.length&&!f(/\b(validat\w*|verif\w*|test\w*)\b/i).length)out.push(mk('asm','Assumption','Stated assumptions have no validation plan',3,.9,as.slice(0,4),'Assumptions are listed but nothing says how or when they will be checked.','Which assumption would most change the plan if wrong?','Rank assumptions by impact and attach a cheap check and date to each.'));
+ add('ext','Constraint','External dependency without terms',4,.7,/\b(third-party|vendor|external|api|integration|supplier|partner)\b/i,'External parties are cited but no SLA, fallback, contract or rate limit is mentioned for them.','What are their availability, limits and exit options?','Document SLA, rate limits, cost and a fallback for each external dependency.',/\b(sla|fallback|contract|rate limit|uptime|exit)\b/i);
+ add('appr','Constraint','Review or approval step without a time bound',3,.6,/\b(approv\w*|review\w*|sign-off)\b/i,'Unbounded review steps are a common source of schedule slip.','How long may each approval take and who is the backup approver?','Set a turnaround time and an escalation path.',/\d/);
+ add('qs','Question','Questions already raised but unresolved',3,1,/\?\s*$/,'The author asked these, and they are still open in the text.','Who will answer these, and what is blocked until then?','Assign an owner and due date to each question.');
+ const kv={};L.forEach(l=>{const m=l.txt.match(/^[-*\s]*([A-Za-z][\w &/]{1,30}):\s*(.{1,80})$/);if(m){const k=m[1].toLowerCase().trim();(kv[k]=kv[k]||[]).push({ln:l.ln,txt:l.txt,v:m[2].toLowerCase().trim()})}});
+ for(const k in kv){const a=kv[k];if(a.length>1&&new Set(a.map(x=>x.v)).size>1)out.push(mk('cf-'+k,'Conflict','Conflicting values for “'+k+'”',5,1,a,'The same field is given different values, so any plan built on it may use the wrong one.','Which value is authoritative?','Pick one source of truth and remove the others.'))}
+ return out;
+}
+
+function parseCSV(t,d){const r=[];let row=[],fl='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){fl+='"';i++}else q=false}else fl+=c}else if(c=='"')q=true;else if(c==d){row.push(fl);fl=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;row.push(fl);r.push(row);row=[];fl=''}else fl+=c}if(fl!==''||row.length){row.push(fl);r.push(row)}return r.filter(x=>x.some(v=>v.trim()!==''))}
+const isCSV=t=>{const l=t.split(/\r?\n/).filter(Boolean).slice(0,6);if(l.length<3)return 0;for(const d of [',','\t',';']){const c=l.map(x=>x.split(d).length-1);if(c[0]>=2&&c.every(v=>v===c[0]))return d}return 0};
+const MISS=/^(|na|n\/a|null|none|nan|-)$/i;
+
+function analyzeCSV(t,d){
+ const R=parseCSV(t,d),H=R[0].map(x=>x.trim()),B=R.slice(1),n=B.length,out=[],ev=[];COV=[];
+ if(n<30)out.push(mk('n','Data','Small sample size',n<10?5:3,1,[{ln:'—',txt:n+' data rows'}],'Few rows make statistics, splits and generalisation unreliable.','Is this a sample or the full population, and how was it drawn?','Collect more data or state the sampling method and its limits.'));
+ const seen={};let dup=0;B.forEach(r=>{const k=r.join('\u0001');seen[k]=(seen[k]||0)+1;if(seen[k]==2)dup++});
+ if(dup)out.push(mk('dup','Data','Duplicate rows',3,1,[{ln:'—',txt:dup+' distinct rows appear more than once'}],'Duplicates inflate counts and leak between train and test sets.','Are repeats real events or ingestion errors?','Deduplicate with a defined key before analysis.'));
+ const miss=[],oth=[];
+ H.forEach((h,c)=>{
+  const v=B.map(r=>(r[c]??'').trim()),ne=v.filter(x=>!MISS.test(x)),m=n-ne.length,pct=m/n*100,num=ne.filter(x=>x!==''&&!isNaN(+x));
+  if(pct>=5)miss.push({ln:'col',txt:'“'+h+'”: '+pct.toFixed(0)+'% missing ('+m+'/'+n+'), first at row '+(v.findIndex(x=>MISS.test(x))+2),p:pct});
+  const isN=ne.length&&num.length/ne.length>=.9;
+  if(ne.length&&!isN&&num.length/ne.length>.1)oth.push(mk('mix-'+h,'Data','Mixed types in “'+h+'”',3,.9,[{ln:'col',txt:Math.round(num.length/ne.length*100)+'% numeric, rest text'}],'Mixed types usually mean entry errors or undocumented codes.','Do text values encode something such as “unknown”?','Define allowed values and clean or map the exceptions.'));
+  if(isN&&num.length>=8){const s=num.map(Number).sort((a,b)=>a-b),q1=s[s.length>>2],q3=s[(s.length*3)>>2],i=q3-q1,o=s.filter(x=>x<q1-3*i||x>q3+3*i);
+   if(i>0&&o.length)oth.push(mk('out-'+h,'Data','Extreme outliers in “'+h+'”',3,.85,[{ln:'col',txt:o.length+' value(s) far outside the typical range, e.g. '+o.slice(0,3).join(', ')}],'Outliers can be errors, unit mix-ups or the most important cases.','Are these genuine or entry errors?','Inspect them manually and set a validation rule.'));
+   if(/age|price|qty|quantity|amount|count|salary/i.test(h)&&s[0]<0)oth.push(mk('neg-'+h,'Data','Impossible negative values in “'+h+'”',4,1,[{ln:'col',txt:'minimum is '+s[0]}],'Negative values where none should exist point to upstream errors or refunds mixed with sales.','Are negatives refunds, corrections or bugs?','Separate or fix them and add a range check.'))}
+  if(/(^|_)id$/i.test(h)&&ne.length&&new Set(ne).size<ne.length)oth.push(mk('id-'+h,'Data','Identifier “'+h+'” is not unique',5,1,[{ln:'col',txt:(ne.length-new Set(ne).size)+' repeated values'}],'Non-unique keys break joins and silently double-count.','Is this really the entity key?','Establish and enforce a unique key.'));
+  if(ne.length>5&&new Set(ne).size==1)oth.push(mk('const-'+h,'Data','“'+h+'” has a single value',2,1,[{ln:'col',txt:'always “'+ne[0]+'”'}],'A constant column carries no information.','Is data missing upstream?','Drop it or find out why it does not vary.'));
+  const dc=new Set(ne);if(dc.size>1&&dc.size<=5&&!isN){const top=Math.max(...[...dc].map(k=>ne.filter(x=>x==k).length))/ne.length;if(top>.9)oth.push(mk('imb-'+h,'Data','Heavily imbalanced “'+h+'”',/target|label|status|churn|fraud|class/i.test(h)?4:3,.9,[{ln:'col',txt:Math.round(top*100)+'% share for the top value'}],'Rare classes are easily missed and accuracy becomes misleading.','Is the minority class what matters?','Use stratified sampling and class-aware metrics.'))}
+  if(/date|time|_at$/i.test(h)){const ds=ne.map(Date.parse).filter(x=>!isNaN(x));if(ds.length>5){const mx=Math.max(...ds),age=(Date.now()-mx)/864e5;if(age>365)oth.push(mk('stale-'+h,'Data','Data may be stale (“'+h+'”)',3,.8,[{ln:'col',txt:'latest value is '+new Date(mx).toISOString().slice(0,10)}],'Old data may not reflect current behaviour.','Is it still representative?','Confirm freshness requirements and refresh cadence.'))}}
+  if(SENS.test(h))ev.push({ln:'col',txt:'“'+h+'”'});
+ });
+ if(miss.length){const mp=Math.max(...miss.map(x=>x.p));out.push(mk('miss','Data','Missing values in '+miss.length+' column(s)',mp>30?5:mp>15?4:3,1,miss.slice(0,5),'Gaps bias results if they are not random, and many models drop or mis-handle them.','Why are these empty: not collected, not applicable or lost?','Document the cause and choose a handling rule: impute, exclude or collect.'))}
+ if(ev.length)out.push(mk('pii','Data','Columns that look personal',4,.8,ev.slice(0,6),'These column names suggest personal data, so legal and ethical obligations may apply.','Do you have consent, a retention limit and access controls?','Minimise, pseudonymise or restrict these fields before sharing.'));
+ out.push(...oth);COV=H.map(h=>({name:h,n:1}));return out;
+}
+
+function run(){
+ upd();const t=$('#in').value;if(t.trim().split(/\s+/).length<8){$('#out').innerHTML='<div class="empty">Add a little more text so there is something to analyze.</div>';return}
+ const d=isCSV(t);F=(d?analyzeCSV(t,d):analyzeText(t)).sort((a,b)=>b.score-a.score);F.forEach(x=>x.st=ST[x.id]||'open');window.MODE=d?'csv':'text';cat='All';PREV=LAST;LAST=ready(F);{const ids=F.map(x=>x.id);DIFF=PREV!=null&&PIDS?{res:PIDS.filter(i=>!ids.includes(i)).length,neu:ids.filter(i=>!PIDS.includes(i)).length}:null;PIDS=ids}render();
+}
+let cat='All';
+function render(){
+ const act=F.filter(x=>x.st!='dismissed'),cnt=l=>act.filter(x=>lvl(x.score)==l).length,cats=['All',...new Set(F.map(x=>x.cat))];
+ const vis=F.filter(x=>cat=='All'||x.cat==cat);
+ let h='<div class="lab step"><span>2</span>Audit results</div>'+head(act)+'<div class="sum">'+[5,4,3,2].map(l=>'<div><b class="t'+l+'">'+cnt(l)+'</b>'+LN[l]+'</div>').join('')+'<div><b>'+F.filter(x=>x.st=='confirmed').length+'</b>Confirmed</div></div>'+matrix(act);
+ if(MODE=='text'){h+='<div class="lab sect">Topic coverage</div><div class="cov">'+COV.map(c=>'<span class="'+(c.n?'':'no')+'">'+esc(c.name)+(c.n?' · '+c.n:' · none')+'</span>').join('')+'</div>'}
+ h+='<div class="lab sect" style="margin-top:20px">Findings</div><div class="row" style="margin:12px 0 14px">'+cats.map(c=>'<button class="chip'+(c==cat?' on':'')+'" data-c="'+c+'">'+c+' · '+(c=='All'?F.length:F.filter(x=>x.cat==c).length)+'</button>').join('')+'<button id="cq" style="margin-left:auto">Copy team questions</button><button id="cp">Copy full report</button><button id="pr">Print / PDF</button></div>';
+ h+=vis.length?vis.map(x=>{const l=lvl(x.score);return '<details data-id="'+esc(x.id)+'" class="l'+l+(x.st=='dismissed'?' done':'')+'"><summary><span class="sc t'+l+'">'+LN[l]+' · '+x.score+'</span><span class="mt t'+l+'">'+'<i class="on"></i>'.repeat(l-1)+'<i></i>'.repeat(5-l)+'</span><span class="t">'+esc(x.title)+'</span><span class="mu">'+x.cat+(x.st!='open'?' · '+x.st:'')+'</span></summary><div class="bd"><h4>Evidence</h4>'+x.ev.map(e=>'<div class="ev" data-ln="'+(typeof e.ln=='number'?e.ln:'')+'" title="'+(typeof e.ln=='number'?'Click to jump to this line':'')+'"><i>'+(typeof e.ln=='number'?'L'+e.ln:esc(e.ln))+'</i>'+esc(e.txt.slice(0,220))+'</div>').join('')+(x.ev.length?'':'<p class="mu">No supporting text; this is an absence finding.</p>')+'<h4>Why it matters</h4><p>'+esc(x.why)+'</p><h4>Question to ask</h4><p>'+esc(x.q)+'</p><h4>Recommendation</h4><p>'+esc(x.rec)+'</p><h4>Basis for score</h4><p class="mu">Severity '+x.sev+'/5 × confidence '+Math.round(x.conf*100)+'%'+(x.conf<.7?' (absence-based, so lower confidence)':'')+'</p><div class="row"><button data-s="confirmed" data-i="'+esc(x.id)+'">Confirm gap</button><button data-s="dismissed" data-i="'+esc(x.id)+'">Dismiss</button><button data-s="open" data-i="'+esc(x.id)+'">Reset</button></div></div></details>'}).join(''):'<div class="empty">No findings in this view.</div>';
+ const open=[...document.querySelectorAll('details[open] .t')].map(e=>e.textContent);
+ $('#out').innerHTML=h;document.querySelectorAll('details').forEach(d=>{if(open.includes(d.querySelector('.t').textContent))d.open=true});
+}
+let PREV=null,LAST=null,PIDS=null,DIFF=null;
+function ready(a){return Math.max(0,100-a.filter(x=>x.st!='dismissed').reduce((s,x)=>s+({5:12,4:7,3:3,2:1})[lvl(x.score)],0))}
+function head(a){const r=ready(a),v=r>=80?['Mostly solid','t2']:r>=55?['Needs work','t3']:['High risk of surprises','t5'],d=PREV==null?'':' <span class="mu">('+(r>=PREV?'+':'')+(r-PREV)+' since last run'+(DIFF?' · '+DIFF.res+' resolved, '+DIFF.neu+' new':'')+')</span>',top=a.slice(0,3);
+ return '<div class="card hero"><div class="row" style="margin:0;gap:28px"><div class="ring '+v[1]+'" style="--p:'+r+'"><div><b>'+r+'</b><small>/100</small></div></div><div style="flex:1;min-width:240px"><div class="lab">Plan readiness</div><div class="verd">'+v[0]+d+'</div><div class="mu">Starts at 100. Each open gap subtracts points by how serious it is. Fix a gap or dismiss one that doesn’t apply, and the score updates.</div></div></div>'+(top.length?'<div class="lab" style="margin-top:20px">Fix these first</div><ol class="fix">'+top.map(x=>'<li><b>'+esc(x.title)+'</b>: '+esc(x.rec)+'</li>').join('')+'</ol>':'')+'</div>'}
+function qs(){return 'Questions for the team\n\n'+F.filter(x=>x.st!='dismissed').map((x,i)=>(i+1)+'. '+x.q).join('\n')}
+function jump(n){const ta=$('#in'),ls=ta.value.split('\n');let o=0;for(let i=0;i<n-1;i++)o+=ls[i].length+1;ta.scrollIntoView({block:'center'});ta.focus();ta.setSelectionRange(o,o+ls[n-1].length);ta.scrollTop=Math.max(0,n-3)*17}
+function matrix(a){
+ if(!a.length)return'';
+ const W=440,H=250,L=34,R=12,T=12,B=30,X=c=>L+(c-.5)/.5*(W-L-R),Y=s=>H-B-(s-1)/4*(H-B-T),cell={};
+ let g='<rect x="'+X(.75)+'" y="'+Y(5)+'" width="'+(W-R-X(.75))+'" height="'+(Y(3.5)-Y(5))+'" fill="var(--ac)" opacity=".1"/><text x="'+(W-R-6)+'" y="'+(Y(5)+16)+'" text-anchor="end" font-size="11" font-weight="700" fill="var(--ac)">ACT FIRST</text>';
+ for(let s=1;s<=5;s++)g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(s)+'" y2="'+Y(s)+'" stroke="var(--bd)"/><text x="'+(L-8)+'" y="'+(Y(s)+4)+'" text-anchor="end" font-size="11" fill="var(--mu)">'+s+'</text>';
+ g+=a.map(x=>{const k=x.sev+'|'+x.conf,n=cell[k]=(cell[k]||0)+1;return '<circle class="dot t'+lvl(x.score)+'" data-id="'+esc(x.id)+'" cx="'+(X(x.conf)-(n-1)*15-9)+'" cy="'+Y(x.sev)+'" r="7"><title>'+esc(x.title)+' ('+LN[lvl(x.score)]+')</title></circle>'}).join('');
+ return '<div class="card mx"><div class="lab sect">Priority map</div><p class="mu" style="margin:8px 0">Each dot is a finding. Higher means more severe, further right means stronger evidence. Click a dot to open it.</p><svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Findings by severity and evidence strength">'+g+'<text x="'+(L+(W-L-R)/2)+'" y="'+(H-8)+'" text-anchor="middle" font-size="11" fill="var(--mu)">Evidence strength (weaker to stronger)</text><text x="10" y="'+(T+(H-B-T)/2)+'" transform="rotate(-90 10 '+(T+(H-B-T)/2)+')" text-anchor="middle" font-size="11" fill="var(--mu)">Severity</text></svg></div>'}
+function md(){return '# Assumption audit\n\n'+F.filter(x=>x.st!='dismissed').map(x=>'## ['+LN[lvl(x.score)]+' '+x.score+'] '+x.title+' ('+x.cat+')\n'+x.ev.map(e=>'> '+(typeof e.ln=='number'?'L'+e.ln+': ':'')+e.txt).join('\n')+'\n- Why: '+x.why+'\n- Ask: '+x.q+'\n- Do: '+x.rec+'\n').join('\n')}
+$('#out').addEventListener('click',e=>{const dot=e.target.closest('.dot');if(dot){const id=dot.dataset.id;if(cat!='All'){cat='All';render()}const d=[...document.querySelectorAll('details')].find(x=>x.dataset.id==id);if(d){d.open=true;d.scrollIntoView({behavior:'smooth',block:'center'})}return}const ev=e.target.closest('.ev');if(ev&&ev.dataset.ln){jump(+ev.dataset.ln);return}const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.c){cat=b.dataset.c;render()}
+ else if(b.dataset.s){ST[b.dataset.i]=b.dataset.s;F.find(x=>x.id==b.dataset.i).st=b.dataset.s;render()}
+ else if(b.id=='pr'){document.querySelectorAll('details').forEach(d=>d.open=true);print()}
+ else if(b.id=='cp'||b.id=='cq'){const t=b.id=='cq'?qs():md();(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>b.textContent='Copied',()=>{const a=document.createElement('textarea');a.value=t;document.body.append(a);a.select();try{document.execCommand('copy');b.textContent='Copied'}catch(_){b.textContent='Copy failed'}a.remove()})}});
+$('#go').onclick=run;$('#in').addEventListener('keydown',e=>{if(e.ctrlKey&&e.key=='Enter')run()});
+$('#fi').onchange=e=>{const f=e.target.files[0];if(!f)return;if(f.size>2e6){alert('Please use a file under 2 MB.');return}const r=new FileReader();r.onload=()=>{$('#in').value=r.result;ST={};LAST=null;run()};r.readAsText(f)};
+$('#s1').onclick=()=>{$('#in').value=`Project: Customer Support Chatbot
+Deadline: 30 Nov 2026
+Goal: Build a fast and scalable chatbot that reduces support tickets.
+Owner: Product team
+1. Ingest help-center articles and past tickets (includes customer emails and order details).
+2. Fine-tune a model through a third-party API.
+3. Integrate with the live helpdesk and go live for all users.
+4. Legal review of responses.
+Assumptions: the vendor API will always be available. Users will obviously prefer the bot over agents.
+Budget: TBD
+Deadline: 15 Dec 2026
+Should the bot escalate angry customers to humans?`;ST={};LAST=null;run()};
+$('#s2').onclick=()=>{let s='order_id,customer_email,age,quantity,status,order_date\n';for(let i=1;i<=40;i++){const id=i==9?8:i;s+=id+',user'+i+'@mail.com,'+(i%7==0?'':20+i%30)+','+(i==5?-3:i==12?900:1+i%4)+','+(i%20?'delivered':'returned')+',2024-0'+(1+i%9)+'-1'+(i%9)+'\n'}$('#in').value=s;ST={};LAST=null;run()};
+function upd(){const v=$('#in').value;$('#cnt').textContent=(v?v.split('\n').length:0)+' lines · '+(v.trim()?v.trim().split(/\s+/).length:0)+' words'}$('#in').addEventListener('input',upd);
+function fit(){document.body.style.zoom=Math.min(2.4,Math.max(1,Math.min(innerWidth/1380,innerHeight/780)))}fit();addEventListener('resize',fit);
+</script></body></html>
